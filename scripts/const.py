@@ -14,3 +14,6 @@ HEADERS_GET = {
 CVE_BASE_URL = "https://cve.mitre.org/cgi-bin/cvename.cgi?name="
 
 KNOWN_EXPLOITS_FILE= "known_exploited_vulnerabilities.json"
+
+MONITORING_DAYS = 30
+REQUEST_INTERVAL = 2
