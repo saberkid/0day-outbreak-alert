@@ -1,7 +1,7 @@
 import datetime
 from urllib import request
 from apiclient.discovery import build
-import const
+import common.const as const
 import argparse
 import requests
 import urllib.parse

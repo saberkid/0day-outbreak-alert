@@ -1,6 +1,6 @@
 import re
 import requests
-import const
+import common.const as const
 import datetime
 import json
 import urllib
@@ -13,10 +13,10 @@ def url_news_search(search_string, start, end):
     url = f"https://www.google.com/search?q={search_string}&tbm=nws&tbs={query_safe_string}"
     print(url)
     raw = requests.get(url, headers=const.HEADERS_GET).text
-    m = re.search('About (\d.*) results', raw)
+    m = re.search('>(About\s)*(\d.*) result[s]*<', raw)
     result_num = 0
     if m:
-        result_num = int(m.group(1))
+        result_num = int(m.group(2).replace(',', ''))
     print(f"{search_string} {result_num}")
     return result_num
 
@@ -43,3 +43,10 @@ def get_known_exploits():
     except:
         print(f'[Error] Fail to read {const.KNOWN_EXPLOITS_FILE} into json obj')
         raise
+
+# url = "https://www.google.com/search?q=CVE-2021-27104&tbm=nws&tbs=cdr%3A1%2Ccd_min%3A2%2F10%2F2021%2Ccd_max%3A3%2F2%2F2021"
+# raw = requests.get(url, headers=const.HEADERS_GET).text
+# with open('search.html', 'w+', encoding='utf-8') as f:
+#     f.write(raw)
+# m = re.search('>(About\s)*(\d.*) results<', raw)
+# print(m.group(2))
